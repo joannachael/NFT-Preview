@@ -1,0 +1,146 @@
+@use 'reset';
+@use 'variables/font';
+@use 'variables/colors';
+
+body {
+  min-height: 100vh;
+  
+  display: grid;
+  place-items: center;
+
+  font-size: font.$size;
+  font-weight: font.$weight;
+  font-family: font.$family;
+  
+  background-color: colors.$dark-blue-bg;
+}
+
+.link {
+  color: colors.$white;
+  text-decoration: none;
+
+  &:hover {
+    color: colors.$cyan;
+  }
+}
+
+.decorative-span {
+  display: flex;
+  gap: var(--gap, 0.5rem);
+  align-items: center;
+
+  &::before {
+    content: '';
+
+    width: 18px;
+    height: 18px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.card {
+  $content-gap: 1.5rem;
+  $border-radius: 1rem;
+
+  max-width: 25rem;
+  padding: 1.2em;
+
+  display: grid;
+  gap: $content-gap;
+
+  color: colors.$soft-blue;
+
+  border-radius: $border-radius;
+  background-color: colors.$dark-blue-card-bg;
+
+  &__image {
+    position: relative;
+
+    cursor: pointer;
+
+    overflow: hidden;
+    border-radius: $border-radius;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    &::before {
+      content: '';
+
+      opacity: 0;
+
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      background-color: rgba(colors.$cyan, 0.5);
+
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('/images/icon-view.svg');
+
+      transition: opacity 400ms ease-in-out;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: $content-gap;
+
+    &::after {
+      content: '';
+
+      height: 2px;
+      background-color: colors.$dark-blue-line;
+    }
+  }
+
+  &__important {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__rate {
+    font-weight: 600;
+    color: colors.$cyan;
+
+    &::before {
+      background-image: url('/images/icon-ethereum.svg');
+    }
+  }
+
+  &__days {
+    font-weight: 400;
+
+    &::before {
+      background-image: url('/images/icon-clock.svg'); 
+    }
+  }
+
+  &__creator {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__avatar {
+    width: 2.5rem;
+
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+    border: 2px solid rgba(colors.$white, 0.8);
+  }
+}
